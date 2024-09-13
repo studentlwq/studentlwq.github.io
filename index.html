@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my webpage</title>
+    <script>
+        let Bigbang=new Date();
+    </script>
+    <style>
+        *{
+            border:3px solid gold;
+            font-size:30px;
+        }
+        header{
+             height:15%;
+        }
+        main{
+             height:70%;
+             background-color: rgb(241, 216, 184);
+          
+        }
+        footer{
+             height: 15%;
+        }
+    
+    </style>
+    <script>
+
+        console.log("加载css代码:"+(new Date()-Bigbang)+'ms!');
+    </script>
+</head>
+<body>
+    
+    <header>welcom to my webpage!</header>
+    <main>content</main>
+    <footer>my information:江西科技师范大学元宇宙产业学院 22计科2班李婉钦 </footer>
+    <script>
+        document.body.style.height=innerHeight-40+'px';
+        console.log("渲染css:"+(new Date()-Bigbang)+'ms');
+        let timer=new Date();
+        for(i=1;i<=1e8;i++){
+
+        }
+        console.log("从一数到一亿:"+(new Date-timer)+'ms');
+
+    </script>
+</body>
+</html>
