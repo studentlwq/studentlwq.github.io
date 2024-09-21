@@ -3,47 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my webpage</title>
-    <script>
-        let Bigbang=new Date();
-    </script>
+    <title>0921work</title>
     <style>
         *{
-            border:3px solid gold;
-            font-size:30px;
+       
+            margin: 0;
+            font-size: 36px;
+            text-align: center;
+        }
+        p{
+            border: 1px solid rgb(237, 215, 134) ;
         }
         header{
-             height:15%;
+            height: 25%;
+            background-color: rgb(83, 176, 233);
         }
-        main{
-             height:70%;
-             background-color: rgb(241, 216, 184);
-          
+         main{
+            height: 65% ;
+            background-color: rgb(249, 239, 226);
         }
         footer{
-             height: 15%;
+            font-size: 0.5em;
+            height: 10%;
+            background-color:rgb(100, 81, 11);
+            color: white ;
         }
-    
     </style>
-    <script>
-
-        console.log("加载css代码:"+(new Date()-Bigbang)+'ms!');
-    </script>
 </head>
 <body>
+    <header>CET6 word</header>
+    <main>
+        <p id="word">word</p>
+        <p id="pro">pron</p>
+        <p id="ch">chinese</p>
+    </main>
+    <footer>
+        江西科技师范大学 李婉钦
+    </footer>
+<script>
+      document.body.style.height=innerHeight-25+'px';
+    let strCET6='';
+    let arrCET6=[];
+    fetch('cet6.txt')
+    .then(res=>res.text())
+    .then(txt=>{
+        strCET6=txt;
+        arrCET6=strCET6.split('\r\n');
+        let rand=Math.floor(arrCET6.length*Math.random());
+        let cetWord = arrCET6[rand] ;
+        let begin=cetWord.indexOf('\t');
+        let end=cetWord.lastIndexOf('\t');
+        let word=cetWord.slice(0,begin);
+        let pron=cetWord.slice(begin+1,end);
+        let chinese=cetWord.slice(end+1);
+        select('#word').textContent = word ;
+        select('#pro').textContent = pron ;
+        select('#ch').textContent =chinese ;
+    });
+
+
+    function select(str){
+        let dom=document.querySelector(str);
+        return dom;
+    }
+</script>
     
-    <header>welcom to my webpage!</header>
-    <main>content</main>
-    <footer>my information:江西科技师范大学元宇宙产业学院 22计科2班李婉钦 </footer>
-    <script>
-        document.body.style.height=innerHeight-40+'px';
-        console.log("渲染css:"+(new Date()-Bigbang)+'ms');
-        let timer=new Date();
-        for(i=1;i<=1e8;i++){
-
-        }
-        console.log("从一数到一亿:"+(new Date-timer)+'ms');
-
-    </script>
 </body>
 </html>
