@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0921work</title>
+    <style>
+        *{
+            border: 2px solid rgb(58, 167, 179);
+            margin: 0;
+            font-size: 36px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        p{
+            border: 1px solid rgb(237, 215, 134) ;
+        }
+        body{
+            height:90vh;
+            font-size: calc(0.5em+2vw);
+            position: relative;
+        }
+        header{
+            
+            text-align: center;
+            height: 15%;
+            background-color: rgb(83, 176, 233);
+        }
+         main{
+            height: 75% ;
+            background-color: rgb(249, 239, 226);
+        }
+        footer{
+            color: blanchedalmond;
+            font-size: 0.5em;
+            height: 10%;
+            background-color:rgb(100, 81, 11);
+            color: white ;
+        }
+        button{
+            padding: 0.1em;
+            font-size: 1em;
+        }
+        form{
+            font-size: 1.2em;
+            background-color: rgb(199, 167, 92);
+            position: absolute;
+            width: 90%;
+            height: 60%;
+            left: 5% ;
+            top: 10% ;
+            border: 2px solid black;
+        }
+        form input{
+            font-size: 1.2em;
+        }
+    </style>
+    <script>
+    //     let Model={};
+    //     Model.cet6String='';
+    //     Model.CET6=[];
+    //     Model.cetUrl=['cet/cet1.txt','cet/cet2.txt','cet/cet3.txt'];
+    //     for(let i=0;i<Model.cetUrl.length;i++){
+    //         fetch(Model.cetUrl[i])
+    //        .then(res=>res.text())
+    //        .then(txt=>{
+    //         Model.cet6String+=txt;
+    //         UI.log('单词库'+Model.cetUrl[i]+'加载成功！');
+    //        });
+    // };
+    //定义了全局变量，Model对象，用来给程序建立理解模型
+    let Model = {} ;
+    //直接给出五十个单词以应对较慢的网络环境
+        Model.cet6String = "a	/ei/	art.一(个);每一(个);(同类事物中)任一个\r\r\n abandon	/ə'bændən/	vt.离弃,丢弃;遗弃,抛弃;放弃\r\nabdomen	/æb'dəumen/	n.腹,下腹(胸部到腿部的部分)\r\nabatement	/ə'beitmənt/	n.减(免)税,打折扣,冲销\r\nabide	/ə'baid/	vi.(abode,abided)(by)遵守;坚持;vt.忍受,容忍\r\nability	/ə'biliti/	n.能力;本领;才能,才干;专门技能,天资\r\nable	/'eibl/	a.有(能力、时间、知识等)做某事,有本事的\r\nabnormal	/æb'nɔ:məl/	a.反常的,不正常的,不规则的\r\naboard	/ə'bɔ:d/	ad.&prep.在船(飞机、车)上;ad.上船(飞机、车)\r\nabolish	/ə'bɔliʃ/	vt.废除(法律、习惯等);取消\r\nabound	/ə'baund/	vi.大量存在;(~in,~with)充满,富于\r\nabout	/ə'baut/	ad.在周围;大约prep.关于;在周围a.准备\r\nabove	/ə'bʌv/	a.上述的ad.在上面,在前文prep.在..之上,高于\r\nabroad	/ə'brɔ:d/	ad.到国外,在国外;在传播,在流传\r\nabrupt	/ə'brʌpt/	a.突然的,出其不意的;(行为等)粗鲁无礼的\r\nabsence	/'æbsəns/	n.缺乏,不存在;缺席,不在场;缺席的时间\r\nabsent	/'æbsənt,æb'sent/	a.缺席的;缺乏的,不存在的;心不在焉的\r\nabsolute	/'æbsəlju:t/	a.绝对的,完全的;确实的,肯定的\r\nabsorb	/əb'sɔ:b,-'zɔ:b/	vt.吸收(水、光、蒸汽等）;使全神贯注;吞并/兼并\r\nabstract	/'æbstrækt/	a.抽象的n.摘要,文摘,梗概vt.提取;摘录要点\r\nabsurd	/əb'sə:d/	a.荒谬的,荒诞的,荒唐可笑的;不合理的\r\nabundance	/ə'bʌndəns/	n.丰富,充裕,大量\r\nabundant	/ə'bʌndənt/	a.大量(充足)的;(in)丰富(富裕)的\r\nabuse	/ə'bju:z,ə'bju:s/	vt.滥用;虐待,辱骂;诋毁n.滥用;恶习;弊端\r\nacademic	/,ækə'demik/	a.学院的,学术性的;大学的;理论的\r\nacademy	/ə'kædəmi/	n.(高等)专科院校;学术社团,协会,研究院\r\naccelerate	/ək'seləreit/	v.使加速,使增速,促进vi.加快,增加\r\naccent	/'æksənt,æk'sent/	n.口音,腔调;重音(符号)vt.重读\r\naccept	/ək'sept/	vt.接受,领受;认可,同意vi.同意,认可\r\nacceptable	/ək'septəbl/	adj.可接受的,合意的\r\nacceptance	/ək'septəns/	n.接受,接收,验收,接纳;承认,认可\r\naccess	/'ækses/	n.进入;接入;到达;享用权;入口vi.存取\r\naccessory	/ək'sesəri/	n.附件,附属品;(为全套衣服增加美感的)服饰\r\naccident	/'æksidənt/	n.意外遭遇,事故;意外(因素)\r\naccidental	/,æksi'dentəl/	a.偶然的;意外的;无意中的\r\nacclaim	/ə'kleim/	v.向…欢呼,公认n.欢呼,喝彩,称赞\r\naccommodate	/ə'kɔmədeit/	vt.向…提供住处;对...予以照顾性考虑\r\naccommodation	/ə,kɔmə'deiʃən/	n.(accommodations)住宿,留宿;膳宿供应\r\naccompany	/ə'kʌmpəni/	v.陪伴,陪同;伴随,和...一起发生,伴奏\r\naccomplish	/ə'kʌmpliʃ,ə'kɔm-/	v.实现(计划等);达到(目的);完成(任务)\r\naccord	/ə'kɔ:d/	vt.给予(欢迎、称颂等)vi.&n.符合,一致\r\naccordance	/ə'kɔ:dəns/	n.一致,和谐,符合\r\naccordingto	/ə'kɔ:diŋtu/	prep.据/照…(所说、所写);按…,视…\r\naccordingly	/ə'kɔ:diŋli/	ad.相应地,照着办,按照;于是,因此\r\naccount	/ə'kaunt/	a.叙述,说明;账目,账户vi.说明,解释\r\naccountant	/ə'kauntənt/	n.会计人员,会计师\r\naccumulate	/ə'kju:mjuleit/	vt.堆积,积累,积聚vi.累积,聚积\r\naccuracy	/'ækjurəsi/	n.准确（性）;精确;准确度\r\naccurate	/'ækjurət/	a.正确无误的;准确的,精确的\r\naccuse	/ə'kju:z/	vt.控告,指责vi.指控,指责" ;
+        //把字符串处理成单词对象，存放进Model.CET6中
+        //用fech异步读取三个网上的单词文本
+
+        Model.CET6 = [] ;
+        Model.users=[{userName:'linda',userPassword:'1234'}];
+        {
+         
+         let str = localStorage.getItem('users') ;
+        if(str){
+          let users = JSON.parse(str) ;
+          Model.users = users ;
+         }
+       }
+        
+        Model.pos=0;
+        {//局部代码块，处理数据，避免引入全局变量
+            let createCET6=function(str){
+                let arr=str.split('\r\n');
+            for(let i=0;i<arr.length;i++){
+                let m=arr[i];
+                let word={};
+                let words=m.split('\t');
+                word.en=words[0];
+                word.pn=words[1];
+                word.ch=words[2];
+                Model.CET6.push(word);
+            }
+            
+
+            }
+            //读入用户外存中的localstorage用户组
+        fetch('cet/cet1.txt')
+        .then(res => res.text())
+        .then(txt => {
+                    
+                     Model.CET6 = [] ;
+                     createCET6(txt) ;
+        }) ;
+        fetch('cet/cet2.txt')
+        .then(res => res.text())
+        .then(txt => {                             
+                     createCET6(txt) ;
+                     UI.log('第二部分单词已经读入系统！');
+                  }
+        ) ;
+        fetch('cet/cet3.txt')
+        .then(res => res.text())
+        .then(txt => {                             
+                     createCET6(txt) ;
+                     UI.log('最后一部分单词终于读入了系统！');
+                  }
+        ) ;
+        //本函数把Model.cet6String处理成单词对象，单词对象被压入Model.CET6数组
+       createCET6(Model.cet6String) ; 
+        }
+        // Model.cetUrl = ['cet/cet1.txt','cet/cet2.txt','cet/cet3.txt'];
+        // for(let i=0; i<Model.cetUrl.length; i++){
+        //     fetch(Model.cetUrl[i])
+        //     .then(res => res.text())
+        //     .then(txt => {
+        //         Model.cet6String += txt ;
+        //         UI.log('单词库：' + Model.cetUrl[i] + ' 加载成功!') ;       
+        //     });
+        //   } ;
+      
+    </script>
+</head>
+<body>
+    <header>CET6 word</header>
+    <nav>
+        <button id="readk">随机单词</button>
+        <button id="firstword">首个单词</button>
+        <button id="nextword">下个单词</button>
+        <button id="lastword">尾部单词</button>
+    </nav>
+    <form id="loginForm">
+            <p>登陆界面</p>
+            名字：<input type="text" name="userName"/><br>
+            密码：<input type="password" name="userPassword"/><br>
+            <!-- <input type="submit" value="登录">
+            <input type="submit" value="注册"> -->
+            <button id="login" name="login">
+                登录
+            </button>
+            <button id="regist" name="regist">
+               注册
+            </button>
+        </form>
+    <main>
+        
+        <p id="word"></p>
+        <p id="pro"></p>
+        <p id="ch"></p>
+    </main>
+    <footer>
+        江西科技师范大学 李婉钦
+    </footer>
+    
+<script>
+     /* document.body.style.height=innerHeight-25+'px';
+    let strCET6='';
+    let arrCET6=[];
+   fetch('cet6.txt')
+    .then(res=>res.text())
+    .then(txt=>{
+        strCET6=txt;
+        arrCET6=strCET6.split('\r\n');
+        let rand=Math.floor(arrCET6.length*Math.random());
+        let cetWord = arrCET6[rand] ;
+        let begin=cetWord.indexOf('\t');
+        let end=cetWord.lastIndexOf('\t');
+        let word=cetWord.slice(0,begin);
+        let pron=cetWord.slice(begin+1,end);
+        let chinese=cetWord.slice(end+1);
+        select('#word').textContent = word ;
+        select('#pro').textContent = pron ;
+        select('#ch').textContent =chinese ;
+    });*/
+  //与用户交流的代码
+    let UI={};
+    UI.form=select('form#loginForm');
+    
+    UI.form.regist.onclick=function(ev){
+        ev.preventDefault();
+        // let namestr=UI.form.userName;
+        // let passStr=UI.form.
+        if(UI.form.userName.value.trim()!==""&&UI.form.userPassword.value.trim()!==""){
+            let userName=UI.form.userName.value;
+        let password=UI.form.userPassword.value;
+        let user={
+            'userName':userName,
+            'userPassword':password
+        };
+        let users=Model.users;
+        let exist =false;
+       for(let u of users){
+        if(u.userName===user.userName){
+            exist=true;
+            break;
+        }
+       }
+       if(exist){
+        UI.log('您注册的用户名已经存在！')
+       }else{
+        users.push(user);
+        let s=JSON.stringify(users)
+        localStorage.setItem('user',s);
+        UI.log('欢迎！'+user.userName);
+       }
+        }
+        
+       
+    };//用户注册
+
+
+    // select('form button#login').onclick=function(ev)
+    UI.form.login.onclick=function(ev){
+        ev.preventDefault();
+        let userName=UI.form.userName.value;
+        let password=UI.form.userPassword.value;
+        let user={
+            'userName':userName,
+            'userPassword':password
+        };
+        let users=Model.users;
+        let exist =false;
+       for(let u of users){
+        if(u.userName===user.userName&&u.userPassword===user.userPassword){
+            exist=true;
+            break;
+        }
+       }
+       if(exist){
+        UI.log('登录成功！欢迎'+user.userName);
+
+        UI.form.style.display='none';
+       }else{
+        users.push(user);
+        UI.log('登陆失败！');
+       }
+       
+    };//用户登录
+UI.form.userName.onblur=function(ev){
+    ev.preventDefault();
+    let userName=UI.form.userName.value.trim();
+    if(userName==""){
+        UI.log('用户名不能为空');
+        UI.form.userName.focus();
+    }
+}
+UI.form.userPassword.onblur=function(ev){
+    ev.preventDefault();
+    let userPassword=UI.form.userPassword.value.trim();
+    if(userPassword==""){
+        UI.log('密码不能为空');
+        UI.form.userPassword.focus();
+    }
+}
+    UI.log=function(s){
+        select('footer').textContent=s;
+    };
+    UI.printWord = function(word){ //word是单词对象的数据结构word.en，word.pn，word.cn
+        select('p#word').textContent=word.en;
+        select('p#pro').textContent=word.pn;
+        select('p#ch').textContent=word.ch;
+     } ;
+    select('button#readk').onclick=function(){
+        let CET6=Model.CET6;
+        let rand=Math.floor(Math.random()*CET6.length);
+        Model.pos=rand;
+        let word=CET6[Model.pos];
+        UI.printWord(word);
+        UI.log('你选中了第'+(Model.pos+1)+'个单词');
+    }
+    select('button#firstword').onclick=function(){
+        let CET6 =  Model.CET6 ;
+        Model.pos=0;
+        let word = CET6[Model.pos] ;
+        UI.printWord(word);
+        UI.log('你选中了第 1 个单词');
+     }
+    select('button#lastword').onclick=function(){
+        let CET6 =  Model.CET6 ;
+        Model.pos=CET6.length-1;
+        let word = CET6[Model.pos] ;
+        UI.printWord(word);
+        UI.log('你选中了第'+(Model.pos+1)+'个单词');
+    }
+    select('button#nextword').onclick=function(){
+       let CET6=Model.CET6;
+       if(Model.pos==CET6.length-1)
+       {
+        Model.pos=0;
+       }else{
+        Model.pos++;
+       }
+       let word=CET6[Model.pos];
+       UI.printWord(word);
+        UI.log('你选中了第'+(Model.pos+1)+'个单词');
+
+    }
+    // UI.headerLog = function(s){
+    //   select('header').textContent = s ;
+    //   } ;
+    // select('button#readk').onclick=function(){
+    //     Model.CET6=Model.cet6String.split('\r\n');
+    //     if(Model.CET6.length<5000){
+    //         UI.log("请点击读入单词读取");
+    //     }else{
+    //         UI.log("读入了"+Model.CET6.length+"个单词")
+    //     }
+    // };
+    // select('button#rank').onclick = function(){
+                
+    //             if(Model.CET6.length < 5000){
+    //                 UI.log("请点“读入单词”按钮");
+    //             }else{
+    //                 let rand = Math.floor(Math.random() * Model.CET6.length) ;
+    //                 UI.headerLog(Model.CET6[rand] ) ;
+    //                 UI.log("我已经读入了"+ Model.CET6.length + "单词!")
+    //             }
+                
+    //           } ;
+
+    function select(str){
+        let dom=document.querySelector(str);
+        return dom;
+   }
+
+</script>
+    
+</body>
+</html>
